@@ -13,6 +13,20 @@
         height: 400px;
     }
  </style>
+ {% if ERROR %}
+     <div class="row row-space-2 margin-b-4">
+         <div class="col-sm-7 col-sm-offset-3">
+             <div class="panel panel-danger">
+                 <div class="panel-heading"><h3 style="text-align:center">Unable to load batch file</h3> </div>
+                 <div class="panel-body">
+                     {% for values in ERROR %}
+                         <h4>{{values}}</h4>
+                     {% endfor %}
+                 </div> <!--  end of panel body -->
+             </div> <!--  end of panel  -->
+         </div> <!--  end of col-sm-7 -->
+     </div> <!--  end of row -->
+ {% endif %}
 
 {% if sample_recorded %}
 
@@ -433,8 +447,13 @@
     <div class="row row-space-4 margin-b-4">
         <div class="col-sm-12">
             <div class="tab">
-                <button class="tablinks" onclick="summaryBin(event, 'newSamples')" id="defaultOpen">Record new Samples</button>
-                <button class="tablinks" onclick="summaryBin(event, 'batchSamples')">Load batch new Samples</button>
+                {% if not ERROR %}
+                    <button class="tablinks" onclick="summaryBin(event, 'newSamples')" id="defaultOpen">Record new Samples</button>
+                    <button class="tablinks" onclick="summaryBin(event, 'batchSamples')">Load batch new Samples</button>
+                {% else %}
+                    <button class="tablinks" onclick="summaryBin(event, 'newSamples')" >Record new Samples</button>
+                    <button class="tablinks" onclick="summaryBin(event, 'batchSamples')" id="defaultOpen">Load batch new Samples</button>
+                {% endif %}
 
                 <div id="newSamples" class="tabcontent">
                     <div class="row row-space-4 margin-b-4">

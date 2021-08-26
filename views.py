@@ -35,7 +35,7 @@ from .utils.run_preparation import  *
 from .utils.additional_kits import *
 from .utils.handling_statistics import *
 from .utils.handling_sequencers import *
-#from .utils.samplesheet_checks import *
+from .utils.handling_load_batch_samples import *
 #from .utils.wetlab_misc_utilities import normalized_data
 from iSkyLIMS_core.utils.handling_samples import *
 from iSkyLIMS_core.utils.handling_platforms import get_defined_platforms_and_ids
@@ -3175,7 +3175,23 @@ def record_samples(request):
             return render(request, 'iSkyLIMS_wetlab/recordSample.html',{'sample_recorded':sample_recorded})
         else:
             return render(request, 'iSkyLIMS_wetlab/recordSample.html',{'sample_recorded':sample_recorded})
+    ## Load batch file
+    elif request.method == 'POST' and request.POST['action'] == 'defineBatchSamples':
+        sample_information = prepare_sample_input_table(__package__)
+        if 'samplesExcel' in request.FILES:
+            samples_batch_df = read_batch_sample_file(request.FILES['samplesExcel'])
+            if 'ERROR' in samples_batch_df:
+                return render(request, 'iSkyLIMS_wetlab/recordSample.html',{'sample_information':sample_information})
+            valid_file_result = valid_sample_batch_file(samples_batch_df,  __package__)
+            if valid_file_result != 'OK':
+                return render(request, 'iSkyLIMS_wetlab/recordSample.html',{'sample_information':sample_information, 'ERROR': valid_file_result})
 
+                for sample_data in sample_batch_df:
+                    new_sample =  create_sample_from_file(sample_data)
+                    new_molecule = create_molecule_from_file(new_sample,sample_data)
+                    create_molecule_parameter_DNA_from_file(new_molecule, sample_data,new_sample)
+                    create_sample_project_fields_value(new_sample,sample_data)
+                    return render(request, 'iSkyLIMS_wetlab/recordSample.html',{'successfuly_load':'ok'})
     ## Form to get the new samples
     else:
         sample_information = prepare_sample_input_table(__package__)

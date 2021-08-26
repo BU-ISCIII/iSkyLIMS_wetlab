@@ -378,6 +378,16 @@ ERROR_SEQUENCER_CONFIGURATION_ALREADY_DEFINED = ['Unable to save the Sequencer c
 
 ERROR_NOT_ALLOWED_REPEATED_PROJECTS = ['Configuration settigs are set do not allow that a project can be in 2 different runs','The following project is already defined']
 
+#######################  Batch file ###############################################
+ERROR_MESSAGE_FOR_EMPTY_SAMPLE_BATCH_FILE = ['The uploaded sample batch file does not have any sample', 'Upload a valid batch file']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_LAB_REQUESTED = ['The Laboratory', 'from where the samples are received is not defined']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_DEFINED_LAB_REQUESTED = ['No Laboratory is defined yet', 'Check documentation to define the Laboratory']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_EMPTY_VALUE = ['Batch file contains empty values']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_DEFINED_TYPE_OF_SAMPLES = ['No Type of Samples are defined yet', 'Check documentation to define them']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_SAMPLE_TYPE = ['The Type of sample', 'is not defined']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_DEFINED_SPECIES =['No Species are defined yet', 'Check documentation to define them']
+ERROR_MESSAGE_FOR_SAMPLE_BATCH_FILE_NO_SPECIES =['The specie', 'is not defined']
+
 ############### HEADING FOR PROJECT DATA VISUALIZATION #####################
 HEADING_FOR_PROJECT_DATES = ['Project Recorder date', 'Project date']
 
